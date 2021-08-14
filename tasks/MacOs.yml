@@ -1,0 +1,16 @@
+---
+# Run wehn MacOs (only local)
+- name: Found MacOs version
+  debug:
+    msg: "MacOs version {{ ansible_facts['distribution_major_version'] }}"
+
+- name: Extension packages
+  debug: var=extension_packages
+
+- name: Brew install common extension packages
+  homebrew: name={extension_packages} state=present
+  tags:
+    - common
+    - extension
+    - packages
+    - general

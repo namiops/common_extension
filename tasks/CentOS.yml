@@ -1,0 +1,53 @@
+---
+# Run when  OS CentOS
+- name: Centos version
+  debug: var=ansible_facts['distribution_major_version']
+
+- name: Extension packages
+  debug: var=extension_centos_packages
+
+- name: Upgrade all packages
+  yum: name=* state=latest
+
+- name: Install rustup
+  shell: |
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+- name: Install system tools
+  yum: name="gcc,gcc-c++,kernel-devel,make,openssl-devel" state="present"
+
+- name: Install extension packages
+  shell: |
+    source $HOME/.cargo/env
+    if ! type "{{item}}" > /dev/null; then
+      cargo install {{item}}
+    fi
+  with_items: "{{extension_centos_packages}}"
+
+#- name: Install bat
+#  shell: |
+#    V=$(curl --silent "https://api.github.com/repos/sharkdp/bat/releases/latest" | grep -Eo '"tag_name": "v(.*)"' | sed -E 's/.*"([^"]+)".*/\1/')
+#    curl -sOL "https://github.com/sharkdp/bat/releases/download/$V/bat-$V-x86_64-unknown-linux-musl.tar.gz"
+#    tar xzvf "bat-$V-x86_64-unknown-linux-musl.tar.gz" -C .
+#    sh -c "cp ./bat-$V-x86_64-unknown-linux-musl/bat /usr/local/bin/bat"
+#    rm -f bat-$V-x86_64-unknown-linux-musl.tar.gz && unset V
+#
+#- name: Install fd
+#  shell: |
+#    V=$(curl --silent "https://api.github.com/repos/sharkdp/fd/releases/latest" | grep -Eo '"tag_name": "v(.*)"' | sed -E 's/.*"([^"]+)".*/\1/')
+#    curl -sOL "https://github.com/sharkdp/fd/releases/download/$V/fd-$V-x86_64-unknown-linux-musl.tar.gz"
+#    tar xzvf "fd-$V-x86_64-unknown-linux-musl.tar.gz" -C .
+#    sh -c "cp ./fd-$V-x86_64-unknown-linux-musl/fd /usr/local/bin/fd"
+#    rm -f fd-$V-x86_64-unknown-linux-musl.tar.gz && unset V
+
+- name: Extension centos packages
+  debug: var=extension_centos_packages
+
+#- name: Install commmon extension packages
+#  yum: name="{{ extension_centos_packages }}" state="present"
+#  ignore_errors: true
+#  tags:
+#    - common
+#    - common_extension
+#    - packages
+#    - general

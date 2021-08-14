@@ -1,0 +1,28 @@
+---
+# Run when  Debian
+- name: Found Debian version
+  debug:
+    msg: "Debian version {{ ansible_facts['distribution_major_version'] }}"
+
+- name: Upgrade all existed apt packages
+  apt: upgrade=dist force_apt_get=yes
+
+- name: Enable sudo and build-essential for installation
+  apt: name="sudo,curl,build-essential,pkg-config,libssl-dev" state=present
+  tags:
+    - common
+
+- name: Extension debian packages
+  debug: var=extension_debian_packages
+
+- name: Install rustup
+  shell: |
+    curl https://sh.rustup.rs -sSf | sh -s -- -y
+
+- name: Install extension packages
+  shell: |
+    . $HOME/.cargo/env
+    if ! type "{{item}}" > /dev/null; then
+      cargo install {{item}}
+    fi
+  with_items: "{{extension_debian_packages}}"

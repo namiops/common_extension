@@ -1,0 +1,14 @@
+---
+# List of standard common extension for developer
+extension_centos_packages:
+  - fd
+  - sd
+  - fzf
+  - tokei
+
+extension_debian_packages:
+  - bat
+  - fd
+  - sd
+  - fzf
+  - tokei

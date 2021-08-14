@@ -1,0 +1,37 @@
+---
+# List of standard common extension packages
+extension_centos_packages:
+  - bat
+  - fd-find
+  - sd
+  - tokei
+  - du-dust
+  - ripgrep
+  - procs
+  - tealdeer
+  - rmesg
+  - ytop
+
+extension_debian_packages:
+  - bat
+  - fd-find
+  - sd
+  - tokei
+  - du-dust
+  - ripgrep
+  - procs
+  - tealdeer
+  - rmesg
+  - ytop
+
+extension_ubuntu_packages:
+  - bat
+  - fd-find
+  - sd
+  - tokei
+  - du-dust
+  - ripgrep
+  - procs
+  - tealdeer
+  - rmesg
+  - ytop
