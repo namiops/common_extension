@@ -5,27 +5,27 @@ driver:
   name: docker
 platforms:
 
-#  - name: CentOS-8
-#    image: centos:8
-#    pre_build_image: true
-#  - name: CentOS-7
-#    image: centos:7
-#    pre_build_image: true
-#
+  - name: CentOS-8
+    image: centos:8
+    pre_build_image: true
+  - name: CentOS-7
+    image: centos:7
+    pre_build_image: true
+
   - name: Debian-10
     image: debian:10
     pre_build_image: true
-#  - name: Debian-9
-#    image: debian:9
-#    pre_build_image: true
-#
-#  - name: Ubuntu_20.04
-#    image: ubuntu:focal
-#    pre_build_image: true
-#  - name: Ubuntu_20.10
-#    image: ubuntu:groovy
-#    pre_build_image: true
-#  - name: Ubuntu_18.04
+  - name: Debian-9
+    image: debian:9
+    pre_build_image: true
+
+  - name: Ubuntu_20.04
+    image: ubuntu:focal
+    pre_build_image: true
+  - name: Ubuntu_20.10
+    image: ubuntu:groovy
+    pre_build_image: true
+  - name: Ubuntu_18.04
     image: ubuntu:bionic
     pre_build_image: true
 
