@@ -1,0 +1,40 @@
+version: 2.1
+commands:
+  setup:
+    steps:
+      - checkout
+      - run:
+          name: Update machine
+          command: |
+            sudo apt-get update
+      - run:
+          name: Install Pipenv
+          command: |
+            pyenv install 3.8
+            pyenv global 3.8 && pip install pipenv
+      - run:
+          name: Install Ansible and Molecule
+          command: |
+            sudo apt install -y ansible ansible-lint
+            python3 -m pip install --upgrade --user setuptools
+            python3 -m pip install "molecule[ansible]"
+            python3 -m pip install --user "molecule[docker,lint]"
+jobs:
+  build-test:
+    machine:
+      image: ubuntu-2004:202101-01
+    steps:
+      - setup
+      - run:
+          name: Molecule Test
+          command: |
+            molecule test
+    environment:
+      DOCKER_BUILDKIT: "1"
+      DOCKER_CLI_EXPERIMENTAL: "enabled"
+
+workflows:
+  version: 2
+  build-and-test:
+    jobs:
+      - build-test
