@@ -16,13 +16,12 @@
   debug: var=extension_debian_packages
 
 - name: Install rustup
-  shell: |
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+  raw: curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 - name: Install extension packages
   shell: |
     . $HOME/.cargo/env
-    if ! type "{{item}}" > /dev/null; then
-      cargo install {{item}}
+    if ! type "{{ item }}" > /dev/null; then
+      cargo install {{ item }}
     fi
-  with_items: "{{extension_debian_packages}}"
+  with_items: "{{ extension_debian_packages }}"

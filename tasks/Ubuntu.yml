@@ -14,20 +14,19 @@
     - packages
     - sudo
 
-- name: Extension debian packages 
+- name: Extension debian packages
   debug: var=extension_ubuntu_packages
 
 - name: Install rustup
-  shell: |
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+  raw: curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 - name: Install extension packages
   shell: |
     . $HOME/.cargo/env
-    if ! type "{{item}}" > /dev/null; then
-      cargo install {{item}}
+    if ! type "{{ item }}" > /dev/null; then
+      cargo install {{ item }}
     fi
-  with_items: "{{extension_ubuntu_packages}}"
+  with_items: "{{ extension_ubuntu_packages }}"
 
 #- name: Install common extension packages
 #  apt: name={{ extension_ubuntu_packages }} state=present

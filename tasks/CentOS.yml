@@ -6,12 +6,8 @@
 - name: Extension packages
   debug: var=extension_centos_packages
 
-- name: Upgrade all packages
-  yum: name=* state=latest
-
 - name: Install rustup
-  shell: |
-    curl https://sh.rustup.rs -sSf | sh -s -- -y
+  raw:  curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 - name: Install system tools
   yum: name="gcc,gcc-c++,kernel-devel,make,openssl-devel" state="present"
@@ -19,10 +15,10 @@
 - name: Install extension packages
   shell: |
     source $HOME/.cargo/env
-    if ! type "{{item}}" > /dev/null; then
-      cargo install {{item}}
+    if ! type "{{ item }}" > /dev/null; then
+      cargo install {{ item }}
     fi
-  with_items: "{{extension_centos_packages}}"
+  with_items: "{{ extension_centos_packages }}"
 
 #- name: Install bat
 #  shell: |
