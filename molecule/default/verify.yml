@@ -3,7 +3,7 @@
 
 - name: Verify
   hosts: all
-  gather_facts: true
+  gather_facts: yes
   tasks:
   # Verify image facts
   - name: Print all ansible facts
