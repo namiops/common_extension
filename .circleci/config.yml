@@ -10,8 +10,8 @@ commands:
       - run:
           name: Install Pipenv
           command: |
-            pyenv install 3.8
-            pyenv global 3.8 && pip install pipenv
+            pyenv install 3.8.10
+            pyenv global 3.8.10 && pip install pipenv
       - run:
           name: Install Ansible and Molecule
           command: |
