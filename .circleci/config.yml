@@ -23,6 +23,7 @@ jobs:
       - setup
       - run:
           name: Molecule Test
+          no_output_timeout: 60m
           command: |
             molecule test
     environment:
