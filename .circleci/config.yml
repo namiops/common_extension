@@ -9,11 +9,6 @@ commands:
           command: |
             sudo apt-get update
       - run:
-          name: Install Pipenv
-          command: |
-            pyenv install 3.8-dev
-            pyenv global 3.8-dev && pip install pipenv
-      - run:
           name: Install Ansible and Molecule
           command: |
             sudo apt install -y ansible ansible-lint
