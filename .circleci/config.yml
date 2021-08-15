@@ -8,11 +8,6 @@ commands:
           command: |
             sudo apt-get update
       - run:
-          name: Install Pipenv
-          command: |
-            pyenv install 3.8.10
-            pyenv global 3.8.10 && pip install pipenv
-      - run:
           name: Install Ansible and Molecule
           command: |
             sudo apt install -y ansible ansible-lint
@@ -23,6 +18,7 @@ jobs:
   build-test:
     machine:
       image: ubuntu-2004:202101-01
+    working_directory:  ~/project/common_extension
     steps:
       - setup
       - run:
