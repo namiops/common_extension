@@ -24,6 +24,7 @@ jobs:
   build-test:
     machine:
       image: ubuntu-2004:202101-01
+    working_directory: $CIRCLE_WORKING_DIRECTORY/common_extension
     steps:
       - setup
       - run:
