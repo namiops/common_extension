@@ -2,7 +2,8 @@ version: 2.1
 commands:
   setup:
     steps:
-      - checkout
+      - checkout:
+          path: common_extension
       - run:
           name: Update machine
           command: |
